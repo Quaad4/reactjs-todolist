@@ -1,10 +1,10 @@
-import React from 'react'
+export default function TodoInput(props) {
+    const {handleAddTodos, todoValue, handleInputChange} = props
 
-export default function TodoInput() {
-  return (
-    <header>
-        <input placeholder='Enter ToDo...' />
-        <button>Add</button>
-    </header>
-  )
+    return (
+        <header>
+            <input placeholder='Enter ToDo...' value={todoValue} onChange={handleInputChange} name="todoInput"/>
+            <button onClick={() => handleAddTodos(todoValue)}>Add</button>
+        </header>
+    )
 }
