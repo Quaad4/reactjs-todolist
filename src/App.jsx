@@ -37,6 +37,24 @@ function App() {
     handleDeleteTodo(index)
   }
 
+  function handleTodoUp(index) {
+    if(index > 0) {
+      const newTodoList = [...todos];
+      [newTodoList[index], newTodoList[index - 1]] = [newTodoList[index - 1], newTodoList[index]];
+      setTodos(newTodoList)
+      persistData(newTodoList)
+    }
+  }
+
+  function handleTodoDown(index) {
+    if(index < todos.length - 1) {
+      const newTodoList = [...todos];
+      [newTodoList[index], newTodoList[index + 1]] = [newTodoList[index + 1], newTodoList[index]];
+      setTodos(newTodoList)
+      persistData(newTodoList)
+    }
+  }
+
   useEffect(() => {
     if(!localStorage){
       return
@@ -55,7 +73,7 @@ function App() {
   return (
     <>
       <TodoInput handleAddTodos={handleAddTodos} todoValue={todoValue} handleInputChange={handleInputChange} />
-      <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} handleEditTodo={handleEditTodo}/>
+      <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} handleEditTodo={handleEditTodo} handleTodoUp={handleTodoUp} handleTodoDown={handleTodoDown}/>
     </>
   )
 }
